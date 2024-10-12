@@ -1,8 +1,20 @@
 from vectorize import VectorDB
 import anthropic
 import os
+import logging
+import pandas as pd
+from eval import Evaluation
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
+import warnings
 from langchain._api.module_import import LangChainDeprecationWarning
 # from langchain_community.output_parsers.rail_parser import GuardrailsOutputParser
+
+warnings.filterwarnings("ignore", category=LangChainDeprecationWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
+
+# create log file
+logging.basicConfig(filename='logs.log', filemode='w', level=logging.INFO)
 open('logs.log', 'w').close()
 
 class graphRAG():
@@ -79,6 +91,10 @@ class graphRAG():
         text = [doc.page_content for doc in docs]
 
         response = self.model_prediction(question, text)
+        logging.info(response)
+        response = self.check_response(question, response)
+        logging.info(response)
+        response = self.process_response(response)
         return response
     
     def get_response_recommedations(self, question):
@@ -87,9 +103,32 @@ class graphRAG():
         text = [doc.page_content for doc in docs]
 
         response = self.model_prediction(question, text, format='recommendations')
+        logging.info(response)
+        response = self.check_response(question, response, format='recommendations')
+        logging.info(response)
         response = self.process_response(response)
         return response
     
     
     
 
+
+# if __name__ == "__main__":
+#     model = graphRAG()
+#     questions = [
+#     "What are some of the key foods and strategies focused on in an anti-inflammatory diet?",
+#     "Why is reducing consumption of processed and red meat recommended for an anti-inflammatory eating approach?",
+#     "What role does achieving a healthy weight play in reducing inflammation in the body?",
+#     "How can probiotics and prebiotics help improve gut health and reduce inflammation?",
+#     "What are the recommended omega-6 to omega-3 ratios to aim for in an anti-inflammatory diet?",
+#     "Why are whole foods preferred over isolating specific nutrients in an anti-inflammatory eating plan?",
+#     "What are some of the health conditions that research indicates may benefit from following an anti-inflammatory diet?",
+#     "How can herbs and spices like turmeric, ginger and rosemary help reduce inflammation when included regularly in the diet?",
+#     "What are the potential benefits of plant-based proteins like legumes, nuts and seeds compared to animal proteins in terms of inflammation?",
+#     "Why is it important to focus on foods to include more of rather than just foods to restrict or avoid in an anti-inflammatory eating approach?"
+#     ]
+#     for question in questions:
+#         # response = model.get_response(question)
+#         response = model.get_response_recommedations(question)
+#         print(response)
+#         print('\n\n')

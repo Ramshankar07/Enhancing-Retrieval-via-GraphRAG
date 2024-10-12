@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
+# Connect to Neo4j database
 uri = os.environ.get("NEO4J_URI")
 user = os.environ.get("NEO4J_USERNAME")
 password = os.environ.get("NEO4J_PASSWORD")
@@ -47,6 +47,7 @@ def create_nodes_and_relationships(data):
             session.execute_write(lambda tx: tx.run(create_relationship, value1=values[0], value2=values[2]))
 
 
+# Example usage
 with open("output.json", "r") as read_file:
     json_data = json.load(read_file)
 

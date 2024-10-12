@@ -4,6 +4,18 @@ from neo4j_append import Neo4jAppend
 from helper import Helper
 
 
+# Configure logging
+log_file = "app.log"
+log_format = "%(asctime)s - %(levelname)s - %(message)s"
+logging.basicConfig(filename=log_file, level=logging.INFO, format=log_format)
+logger = logging.getLogger(__name__)
+
+# # Set up logging
+# hlp = Helper()
+# # # hlp.clear_log_file()
+# log = hlp.get_logger()
+# log.info("Starting the app")
+
 
 model = GraphRAG()
 get_response = model.get_response
@@ -43,6 +55,19 @@ if selected_page == "QA with RAG":
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
 
+        # Get model response
+        response = rag.get_response(prompt)
+
+        # Display model response in chat message container
+        with st.chat_message("bot"):
+            st.markdown(response)
+
+        # Add model response to chat history
+        st.session_state.messages.append({"role": "bot", "content": response})
+
+        with open(conversation_file_path, "a") as file:
+            file.write(f"user: {prompt}\n")
+            file.write(f"bot: {response}\n\n")
 
 # QA with Graph RAG Page
 if selected_page == "QA with Graph RAG":
@@ -62,6 +87,19 @@ if selected_page == "QA with Graph RAG":
         # Add user message to Graph RAG chat history
         st.session_state.messages_graph_rag.append({"role": "user", "content": prompt})
 
+        # Get model response
+        response = graphRAG.get_response(prompt)
+
+        # Display model response in chat message container
+        with st.chat_message("bot"):
+            st.markdown(response)
+
+        # Add model response to Graph RAG chat history
+        st.session_state.messages_graph_rag.append({"role": "bot", "content": response})
+
+        with open(conversation_file_path2, "a") as file:
+            file.write(f"user: {prompt}\n")
+            file.write(f"bot: {response}\n\n")
 
 
 # Knowledge Graph Page
@@ -88,3 +126,17 @@ if selected_page == "Recommendations":
 
         # Add user message to Recommendations chat history
         st.session_state.messages_recommendations.append({"role": "user", "content": prompt})
+
+        # Get model response
+        response = graphRAG.get_response_recommedations(prompt)
+
+        # Display model response in chat message container
+        with st.chat_message("bot"):
+            st.markdown(response)
+
+        # Add model response to Recommendations chat history
+        st.session_state.messages_recommendations.append({"role": "bot", "content": response})
+
+        with open(conversation_file_path3, "a") as file:
+            file.write(f"user: {prompt}\n")
+            file.write(f"bot: {response}\n\n")
