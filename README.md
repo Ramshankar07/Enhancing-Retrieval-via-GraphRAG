@@ -1,8 +1,10 @@
-# Enhancing-Retrieval-via-GraphRAG
+# Enhancing Retrieval via Graph RAG
 # Introduction
 Graph RAG is an innovative project that leverages advanced Large Language Model (LLM) techniques to transform the landscape of medical data retrieval and comprehension. By integrating cutting-edge technologies such as triplet generation, knowledge graph construction, semantic search, and an interactive Streamlit application, Graph RAG provides a robust solution for medical professionals and researchers seeking efficient access to complex medical information.
 # Problem Statement
 Medical research and literature are vast and continuously expanding, making it challenging for healthcare professionals and researchers to efficiently extract relevant information. Traditional search methods often fall short in capturing the nuanced relationships and intricate details inherent in medical data, particularly concerning inflammation-related studies. This information overload hampers timely decision-making and impedes the advancement of medical knowledge.
+# Results
+![alt text] (https://github.com/Ramshankar07/Enhancing-Retrieval-via-GraphRAG/blob/216134d24033e1f6cdd386d5c283b08fae2b1f4b/Imgs/results.png)
 # Solution
 Graph RAG addresses these challenges by offering a comprehensive framework that enhances the retrieval and understanding of medical data related to inflammation. The project employs a multi-faceted approach:
 
