@@ -4,7 +4,9 @@ Graph RAG is an innovative project that leverages advanced Large Language Model 
 # Problem Statement
 Medical research and literature are vast and continuously expanding, making it challenging for healthcare professionals and researchers to efficiently extract relevant information. Traditional search methods often fall short in capturing the nuanced relationships and intricate details inherent in medical data, particularly concerning inflammation-related studies. This information overload hampers timely decision-making and impedes the advancement of medical knowledge.
 # Results
-![alt text] (Imgs/results.png)
+
+![results](https://github.com/user-attachments/assets/19ff7525-cf88-4da0-bb82-19755ef2583a)
+
 # Solution
 Graph RAG addresses these challenges by offering a comprehensive framework that enhances the retrieval and understanding of medical data related to inflammation. The project employs a multi-faceted approach:
 
